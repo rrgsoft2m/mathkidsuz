@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  fullName      String
+  email         String   @unique
+  passwordHash  String
+  roleId        Int      // 1 = Admin, 2 = Teacher, 3 = Student
+  createdAt     DateTime @default(now())
+
+  results       Result[]
+  achievements  UserAchievement[]
+  leaderboard   Leaderboard?
+}
+
+model Role {
+  id        Int    @id @default(autoincrement())
+  roleName  String @unique // admin, teacher, student
+}
+
+model Lesson {
+  id            String   @id @default(uuid())
+  title         String
+  contentHtml   String
+  gradeLevel    Int
+  coverImageUrl String?
+
+  quizzes       Quiz[]
+}
+
+model Game {
+  id              String   @id @default(uuid())
+  name            String
+  description     String
+  gameType        String   // math, logic
+  difficultyLevel Int
+}
+
+model Quiz {
+  id            String   @id @default(uuid())
+  lessonId      String
+  questionText  String
+  options       Json     // E.g. ["A", "B", "C", "D"]
+  correctAnswer String
+
+  lesson        Lesson   @relation(fields: [lessonId], references: [id])
+  results       Result[]
+}
+
+model Result {
+  id          String   @id @default(uuid())
+  userId      String
+  quizId      String
+  score       Int
+  attemptedAt DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id])
+  quiz        Quiz     @relation(fields: [quizId], references: [id])
+}
+
+model Achievement {
+  id                   Int      @id @default(autoincrement())
+  badgeName            String
+  iconUrl              String
+  requirementCondition String
+
+  users                UserAchievement[]
+}
+
+model UserAchievement {
+  userId        String
+  achievementId Int
+  earnedAt      DateTime @default(now())
+
+  user          User        @relation(fields: [userId], references: [id])
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+
+  @@id([userId, achievementId])
+}
+
+model Leaderboard {
+  id          String @id @default(uuid())
+  userId      String @unique
+  totalPoints Int    @default(0)
+  globalRank  Int    @default(0)
+
+  user        User   @relation(fields: [userId], references: [id])
+}
