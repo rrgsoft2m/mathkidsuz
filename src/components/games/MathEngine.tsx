@@ -211,19 +211,19 @@ export default function MathEngine() {
     };
 
     const renderStep1 = () => (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center justify-center w-full h-full">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-blue-900 mb-6 md:mb-10 border-b-8 border-blue-300 pb-4 text-center inline-block drop-shadow-sm">Raqamlarni tanla</h2>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6 w-full justify-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center justify-center w-full h-full py-8">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-blue-900 mb-6 md:mb-10 border-b-8 border-blue-300 pb-4 text-center inline-block drop-shadow-sm px-4">Raqamlarni tanla</h2>
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 w-full justify-center px-4">
                 {[
                     { v: 1, label: "1 Xonali", desc: "0-9 gacha", color: "bg-green-100 border-green-500 text-green-900 hover:bg-green-200" },
                     { v: 2, label: "2 Xonali", desc: "10-99 gacha", color: "bg-yellow-100 border-yellow-500 text-yellow-900 hover:bg-yellow-200" },
                     { v: 3, label: "3 Xonali", desc: "100+", color: "bg-orange-100 border-orange-500 text-orange-900 hover:bg-orange-200" }
                 ].map(btn => (
                     <div key={btn.v} onClick={() => { setDigits(btn.v); setStep('SELECT_OP'); }}
-                        className={`kid-button cursor-pointer flex-[1] max-w-[280px] px-6 py-6 md:px-8 md:py-10 rounded-[2rem] md:rounded-[2.5rem] border-b-[8px] md:border-b-[10px] border-4 shadow-lg flex flex-col items-center mx-auto w-full ${btn.color}`}>
-                        <div className="text-5xl md:text-7xl font-black mb-2 md:mb-4 drop-shadow-md">{btn.v}</div>
-                        <div className="text-2xl md:text-3xl font-extrabold mb-1 md:mb-2">{btn.label}</div>
-                        <div className="opacity-80 font-bold text-lg md:text-xl">{btn.desc}</div>
+                        className={`kid-button cursor-pointer flex-1 max-w-[320px] px-4 py-6 md:px-8 md:py-10 rounded-2xl md:rounded-[2.5rem] border-b-[6px] md:border-b-[10px] border-4 shadow-lg flex flex-col items-center mx-auto w-full transition-all ${btn.color}`}>
+                        <div className="text-5xl md:text-7xl font-black mb-2 md:mb-4 drop-shadow-md leading-none">{btn.v}</div>
+                        <div className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-1 md:mb-2">{btn.label}</div>
+                        <div className="opacity-80 font-bold text-base md:text-xl">{btn.desc}</div>
                     </div>
                 ))}
             </div>
@@ -231,30 +231,30 @@ export default function MathEngine() {
     );
 
     const renderStep2 = () => (
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center justify-center w-full h-full">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-blue-900 mb-6 md:mb-10 border-b-8 border-blue-300 pb-4 text-center drop-shadow-sm">Amalni tanla</h2>
-            <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center justify-center w-full h-full py-8">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-blue-900 mb-6 md:mb-10 border-b-8 border-blue-300 pb-4 text-center drop-shadow-sm px-4">Amalni tanla</h2>
+            <div className="grid grid-cols-2 gap-4 md:gap-6 w-full max-w-3xl px-4">
                 {[
-                    { op: '+', label: "Qo'shish", icon: "➕", color: "bg-blue-100 border-blue-500 text-blue-900" },
-                    { op: '-', label: "Ayirish", icon: "➖", color: "bg-orange-100 border-orange-500 text-orange-900" },
-                    { op: '*', label: "Ko'paytirish", icon: "✖️", color: "bg-emerald-100 border-emerald-500 text-emerald-900" },
-                    { op: '/', label: "Bo'lish", icon: "➗", color: "bg-rose-100 border-rose-500 text-rose-900" },
+                    { op: '+', label: "Qo'shish", icon: "➕", color: "bg-blue-100 border-blue-500 text-blue-900 hover:bg-blue-200" },
+                    { op: '-', label: "Ayirish", icon: "➖", color: "bg-orange-100 border-orange-500 text-orange-900 hover:bg-orange-200" },
+                    { op: '*', label: "Ko'paytirish", icon: "✖️", color: "bg-emerald-100 border-emerald-500 text-emerald-900 hover:bg-emerald-200" },
+                    { op: '/', label: "Bo'lish", icon: "➗", color: "bg-rose-100 border-rose-500 text-rose-900 hover:bg-rose-200" },
                 ].map(btn => (
                     <div key={btn.op} onClick={() => { setOperator(btn.op); setStep('PLAYING'); setLevel(1); setQuestionCount(0); setScore(0); }}
-                        className={`kid-button cursor-pointer px-4 py-6 md:px-6 md:py-10 rounded-[2rem] md:rounded-[2.5rem] border-b-[8px] md:border-b-[10px] border-4 shadow-lg flex flex-col items-center justify-center hover:brightness-95 ${btn.color}`}>
-                        <div className="text-[3rem] md:text-[5rem] font-black mb-2 md:mb-4 drop-shadow-lg">{btn.icon}</div>
-                        <div className="text-xl md:text-3xl font-extrabold">{btn.label}</div>
+                        className={`kid-button cursor-pointer px-3 py-6 sm:px-4 sm:py-8 md:px-6 md:py-10 rounded-2xl md:rounded-[2.5rem] border-b-[6px] md:border-b-[10px] border-4 shadow-lg flex flex-col items-center justify-center transition-all ${btn.color}`}>
+                        <div className="text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] font-black mb-2 md:mb-4 drop-shadow-lg leading-none">{btn.icon}</div>
+                        <div className="text-lg sm:text-2xl md:text-3xl font-extrabold text-center leading-tight">{btn.label}</div>
                     </div>
                 ))}
             </div>
-            <button onClick={() => setStep('SELECT_DIGIT')} className="mt-8 md:mt-10 font-bold text-gray-400 hover:text-gray-600 bg-white border-4 border-gray-200 px-6 md:px-8 py-3 md:py-4 rounded-full md:rounded-3xl shadow-sm flex items-center gap-2 text-xl md:text-2xl transition-all">
-                <ArrowLeft strokeWidth={3} /> Ortqaga
+            <button onClick={() => setStep('SELECT_DIGIT')} className="mt-8 md:mt-10 font-bold text-slate-500 hover:text-slate-800 bg-white border-4 border-slate-200 px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-3xl shadow-sm flex items-center gap-2 text-lg md:text-2xl transition-all cursor-pointer">
+                <ArrowLeft strokeWidth={3} /> Ortga
             </button>
         </motion.div>
     );
 
     const renderLevelUp = () => (
-        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-blue-900/90 backdrop-blur-md rounded-[3rem] overflow-hidden">
+        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-md rounded-3xl sm:rounded-[3rem] overflow-hidden">
             {Array.from({ length: 50 }).map((_, i) => (
                 <motion.div
                     key={i}
@@ -266,82 +266,82 @@ export default function MathEngine() {
                 />
             ))}
             <motion.div
-                initial={{ scale: 0, rotate: -20 }}
+                initial={{ scale: 0, rotate: -10 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 100, damping: 10 }}
-                className="flex flex-col items-center text-center p-12 bg-white rounded-[4rem] shadow-2xl border-[12px] border-yellow-400"
+                className="flex flex-col items-center text-center p-8 md:p-12 bg-white rounded-[2rem] md:rounded-[4rem] shadow-2xl border-8 md:border-[12px] border-yellow-400 mx-4"
             >
-                <div className="text-8xl mb-6">🏆</div>
-                <h1 className="text-5xl md:text-6xl font-black text-rose-500 drop-shadow-md mb-4 uppercase">Barakalla!
+                <div className="text-6xl md:text-8xl mb-4 md:mb-6">🏆</div>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-rose-500 drop-shadow-md mb-2 md:mb-4 uppercase">Barakalla!
                 </h1>
-                <p className="text-3xl font-extrabold text-blue-900 leading-snug">
-                    Siz {level}-bosqichni muvaffaqiyatli yakunladingiz!
+                <p className="text-xl sm:text-3xl font-extrabold text-blue-900 leading-snug px-4">
+                    Siz {level}-bosqichni yakunladingiz!
                 </p>
-                <div className="mt-8 bg-green-100 text-green-700 font-black text-3xl px-8 py-4 rounded-[2rem] border-4 border-green-400 animate-pulse">
+                <div className="mt-6 md:mt-8 bg-emerald-100 text-emerald-700 font-black text-2xl md:text-3xl px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-[2rem] border-4 border-emerald-400 animate-pulse drop-shadow-sm">
                     +50 Qahramon Balli!
                 </div>
-                <div className="mt-8 text-xl font-bold text-gray-400">Keyingi bosqich yuklanmoqda... 🚀</div>
+                <div className="mt-6 md:mt-8 text-lg font-bold text-slate-400">Keyingi bosqich yuklanmoqda... 🚀</div>
             </motion.div>
         </div>
     );
 
     const renderPlaying = () => (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full flex flex-col items-center relative min-h-[60vh]">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full flex flex-col items-center relative min-h-[60vh] md:min-h-[70vh]">
 
             {showLevelUp && renderLevelUp()}
 
             <AnimatePresence>
                 {particles.map(p => (
-                    <motion.div key={p.id} initial={{ opacity: 1, scale: 0, x: 0, y: 0 }} animate={{ opacity: 0, scale: 2.5, x: p.x, y: p.y }} transition={{ duration: 0.8, ease: "easeOut" }} className="absolute z-50 pointer-events-none text-6xl drop-shadow-xl" style={{ left: '50%', top: '50%' }}>⭐</motion.div>
+                    <motion.div key={p.id} initial={{ opacity: 1, scale: 0, x: 0, y: 0 }} animate={{ opacity: 0, scale: 2.5, x: p.x, y: p.y }} transition={{ duration: 0.8, ease: "easeOut" }} className="absolute z-50 pointer-events-none text-4xl sm:text-6xl drop-shadow-xl" style={{ left: '50%', top: '50%' }}>⭐</motion.div>
                 ))}
             </AnimatePresence>
 
-            <div className="w-full flex justify-between items-center bg-white/70 backdrop-blur-md p-3 md:p-5 rounded-[2rem] md:rounded-[2.5rem] border-4 border-white mb-6 md:mb-8 shadow-md">
-                <button onClick={() => setStep('SELECT_OP')} className="bg-white p-3 md:p-4 rounded-[1rem] md:rounded-[1.5rem] shadow-sm hover:bg-gray-100 border-4 border-gray-200 transition-colors">
-                    <ArrowLeft className="text-gray-800" size={24} strokeWidth={3} />
+            <div className="w-full flex flex-col sm:flex-row justify-between items-center bg-white/80 backdrop-blur-xl p-3 md:p-5 rounded-2xl sm:rounded-[2rem] border-4 border-white mb-6 md:mb-8 shadow-sm gap-4">
+                <button onClick={() => setStep('SELECT_OP')} className="bg-white p-3 md:p-4 rounded-xl sm:rounded-[1.5rem] shadow-sm hover:bg-gray-50 border-4 border-gray-100 transition-colors w-full sm:w-auto flex justify-center cursor-pointer">
+                    <ArrowLeft className="text-gray-700" size={24} strokeWidth={3} />
                 </button>
-                <div className="flex gap-2 md:gap-4">
-                    <div className="bg-yellow-400 border-b-4 md:border-b-8 border-yellow-600 text-yellow-900 px-4 md:px-8 py-2 md:py-3 rounded-[1.5rem] md:rounded-[2rem] font-black text-sm md:text-2xl flex items-center gap-1 md:gap-3 shadow-sm">
-                        <Award size={20} className="md:w-[32px] md:h-[32px]" /> <span className="hidden sm:inline">Bosqich:</span> {level}
+                <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-center">
+                    <div className="bg-yellow-400 border-b-[4px] md:border-b-[6px] border-yellow-500 text-yellow-900 px-4 md:px-6 py-2 rounded-xl sm:rounded-[1.5rem] font-black text-sm sm:text-lg md:text-xl flex items-center justify-center gap-2 shadow-sm w-full sm:w-auto">
+                        <Award size={20} className="md:w-6 md:h-6" /> <span className="hidden sm:inline">Bosqich:</span> {level}
                     </div>
-                    <div className="bg-green-400 border-b-4 md:border-b-8 border-green-600 text-green-900 px-4 md:px-8 py-2 md:py-3 rounded-[1.5rem] md:rounded-[2rem] font-black text-sm md:text-2xl flex items-center gap-1 md:gap-3 shadow-sm">
-                        <Star size={20} className="fill-green-900 md:w-[32px] md:h-[32px]" /> <span className="hidden sm:inline">Ball:</span> {score}
+                    <div className="bg-emerald-400 border-b-[4px] md:border-b-[6px] border-emerald-500 text-emerald-900 px-4 md:px-6 py-2 rounded-xl sm:rounded-[1.5rem] font-black text-sm sm:text-lg md:text-xl flex items-center justify-center gap-2 shadow-sm w-full sm:w-auto">
+                        <Star size={20} className="fill-emerald-900 md:w-6 md:h-6" /> <span className="hidden sm:inline">Ball:</span> {score}
                     </div>
                 </div>
             </div>
 
-            <div className="w-full max-w-xl bg-gray-200 rounded-full h-6 mb-12 overflow-hidden shadow-inner border-[3px] border-gray-300 relative">
+            <div className="w-full max-w-2xl bg-gray-100 rounded-full h-4 sm:h-6 mb-8 md:mb-12 overflow-hidden shadow-inner border-4 border-white relative">
                 <motion.div
                     className="bg-gradient-to-r from-emerald-400 to-emerald-500 h-full rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: `${(questionCount / QUESTIONS_PER_LEVEL) * 100}%` }}
                     transition={{ duration: 0.5, type: 'spring' }}
                 />
-                <div className="absolute inset-0 flex items-center justify-center font-black text-emerald-900 text-xs tracking-widest opacity-60">
+                <div className="absolute inset-0 flex items-center justify-center font-black text-emerald-900 text-[10px] sm:text-xs tracking-widest opacity-80">
                     {questionCount} / {QUESTIONS_PER_LEVEL}
                 </div>
             </div>
 
             <motion.div
                 key={question.a + question.b + operator}
-                initial={{ scale: 0.5, rotate: -3, opacity: 0 }}
+                initial={{ scale: 0.9, rotate: -1, opacity: 0 }}
                 animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                transition={{ type: "spring", bounce: 0.6 }}
-                className="text-[4rem] sm:text-[5rem] md:text-[8rem] font-black text-blue-900 mb-8 md:mb-16 bg-white/95 backdrop-blur-xl px-6 sm:px-12 md:px-24 py-8 md:py-20 rounded-[2.5rem] md:rounded-[4rem] shadow-2xl border-[8px] md:border-[12px] border-white flex justify-center items-center gap-2 sm:gap-4 md:gap-6 w-full max-w-full overflow-hidden"
+                transition={{ type: "spring", bounce: 0.4 }}
+                className="text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] font-black text-slate-800 mb-8 md:mb-12 bg-white px-4 sm:px-8 md:px-12 py-6 sm:py-8 md:py-12 rounded-3xl sm:rounded-[2.5rem] md:rounded-[3rem] shadow-xl border-4 sm:border-8 border-slate-100 flex justify-center items-center gap-3 sm:gap-6 md:gap-8 w-full max-w-4xl flex-wrap drop-shadow-sm leading-none"
             >
-                <span className="truncate">{question.a}</span>
-                <span className="text-indigo-500 drop-shadow-md mx-1 sm:mx-2">{operator === '/' ? '÷' : operator === '*' ? '×' : operator}</span>
-                <span className="truncate">{question.b}</span>
-                <span className="text-gray-300 mx-1 sm:mx-2">=</span>
-                <div className="relative inline-flex items-center justify-center">
+                <span className="drop-shadow-sm leading-none">{question.a}</span>
+                <span className="text-blue-500 drop-shadow-sm leading-none">{operator === '/' ? '÷' : operator === '*' ? '×' : operator}</span>
+                <span className="drop-shadow-sm leading-none">{question.b}</span>
+                <span className="text-slate-300 drop-shadow-sm leading-none">=</span>
+                <div className="relative inline-flex items-center justify-center min-w-[4rem] sm:min-w-[5rem] md:min-w-[6rem] h-14 sm:h-20 md:h-28">
                     {selectedAnswer === null ? (
-                        <span className="text-rose-500 animate-pulse bg-rose-50 rounded-[1.5rem] md:rounded-[2rem] px-4 sm:px-6 border-[4px] md:border-[6px] border-rose-200 shadow-inner inline-flex h-full items-center justify-center -translate-y-1 md:-translate-y-2">?</span>
+                        <span className="text-rose-500 animate-pulse bg-rose-50 rounded-xl sm:rounded-2xl md:rounded-[2rem] px-3 sm:px-4 md:px-6 py-1 sm:py-2 md:py-4 border-4 sm:border-8 border-rose-200 shadow-inner inline-flex items-center justify-center w-full h-full pb-2 md:pb-6 leading-none cursor-default">?</span>
                     ) : (
                         <motion.span
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                            className="text-green-500 rounded-[1.5rem] md:rounded-[2rem] px-4 sm:px-6 bg-green-50 border-[4px] md:border-[6px] border-green-300 shadow-inner inline-flex h-full items-center justify-center -translate-y-1 md:-translate-y-2"
+                            className="text-emerald-500 rounded-xl sm:rounded-2xl md:rounded-[2rem] px-3 sm:px-4 md:px-6 py-1 sm:py-2 md:py-4 bg-emerald-50 border-4 sm:border-8 border-emerald-200 shadow-inner inline-flex items-center justify-center w-full h-full pb-2 md:pb-6 leading-none cursor-default"
                         >
                             {selectedAnswer}
                         </motion.span>
@@ -349,33 +349,33 @@ export default function MathEngine() {
                 </div>
             </motion.div>
 
-            <motion.div animate={shake ? { x: [-15, 15, -15, 15, 0] } : {}} transition={{ duration: 0.4 }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10 relative z-10 w-full max-w-4xl px-4">
+            <motion.div animate={shake ? { x: [-10, 10, -10, 10, 0] } : {}} transition={{ duration: 0.3 }} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 relative z-10 w-full max-w-4xl px-2 sm:px-0">
                 {question.options.map((opt, i) => (
                     <motion.button
                         layout
-                        whileHover={selectedAnswer === null ? { scale: 1.05, y: -4 } : {}}
-                        whileTap={selectedAnswer === null ? { scale: 0.95, y: 4 } : {}}
-                        key={`${question.a}-${question.b}-${i}`} // Force new keys so layout animations don't bug cross-questions
+                        whileHover={selectedAnswer === null ? { scale: 1.03, y: -2 } : {}}
+                        whileTap={selectedAnswer === null ? { scale: 0.97, y: 2 } : {}}
+                        key={`${question.a}-${question.b}-${i}`}
                         onClick={() => handleAnswer(opt)}
                         disabled={showLevelUp || selectedAnswer !== null}
                         animate={{
-                            opacity: selectedAnswer !== null && selectedAnswer !== opt ? 0 : 1, // Fade out wrong options
-                            scale: selectedAnswer === opt ? 0 : 1 // Shrink the selected option before it moves
+                            opacity: selectedAnswer !== null && selectedAnswer !== opt ? 0.3 : 1,
+                            scale: selectedAnswer === opt ? 0.8 : 1
                         }}
-                        transition={{ duration: 0.3 }}
-                        className="kid-button bg-gradient-to-b from-blue-400 to-blue-500 text-white text-[3rem] md:text-[4rem] font-black rounded-[2rem] md:rounded-[3rem] w-full py-4 md:py-8 shadow-[0_8px_0_#1e3a8a] md:shadow-[0_12px_0_#1e3a8a] border-[4px] md:border-8 border-blue-200 hover:brightness-110 flex items-center justify-center active:shadow-none active:border-blue-600 active:translate-y-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                        transition={{ duration: 0.2 }}
+                        className="bg-blue-500 text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black rounded-2xl sm:rounded-[2rem] w-full py-4 sm:py-6 md:py-8 shadow-[0_6px_0_#1e3a8a] md:shadow-[0_8px_0_#1e3a8a] border-4 border-blue-400 hover:brightness-110 flex items-center justify-center active:shadow-none active:translate-y-[6px] md:active:translate-y-[8px] disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer leading-none"
                     >
-                        {opt}
+                        <span className="pb-1 md:pb-2 leading-none">{opt}</span>
                     </motion.button>
                 ))}
             </motion.div>
 
-            <div className="h-28 mt-12 flex items-center justify-center">
+            <div className="h-16 sm:h-24 mt-6 sm:mt-8 flex items-center justify-center">
                 <AnimatePresence>
                     {resultMsg && !showLevelUp && (
                         <motion.div
-                            initial={{ scale: 0.5, y: 30, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.8, opacity: 0, y: -20 }}
-                            className={`text-4xl font-black px-12 py-6 rounded-[2.5rem] shadow-2xl border-8 ${resultMsg.includes("Xato") ? "bg-red-50 text-red-600 border-red-400" : "bg-green-50 text-green-600 border-green-400"}`}
+                            initial={{ scale: 0.8, y: 20, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.8, opacity: 0, y: -10 }}
+                            className={`text-lg sm:text-2xl md:text-3xl font-black px-6 sm:px-10 py-3 sm:py-5 rounded-xl sm:rounded-2xl shadow-lg border-4 ${resultMsg.includes("Xato") ? "bg-rose-50 text-rose-600 border-rose-300" : "bg-emerald-50 text-emerald-600 border-emerald-300"}`}
                         >
                             {resultMsg}
                         </motion.div>
@@ -386,7 +386,8 @@ export default function MathEngine() {
     );
 
     return (
-        <div className="w-full bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 md:p-14 rounded-[2.5rem] md:rounded-[4rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-[4px] sm:border-[8px] md:border-[12px] border-white min-h-[500px] md:min-h-[700px] flex items-center justify-center relative overscroll-none overflow-hidden">
+        <div className="w-full bg-slate-50 p-4 sm:p-6 md:p-14 rounded-3xl sm:rounded-[2.5rem] md:rounded-[4rem] shadow-2xl border-4 sm:border-8 md:border-[12px] border-white min-h-[500px] md:min-h-[700px] flex items-center justify-center relative overflow-hidden"
+            style={{ backgroundImage: 'radial-gradient(#e2e8f0 2px, transparent 2px)', backgroundSize: '32px 32px' }}>
             {step === 'SELECT_DIGIT' && renderStep1()}
             {step === 'SELECT_OP' && renderStep2()}
             {step === 'PLAYING' && renderPlaying()}
